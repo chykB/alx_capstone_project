@@ -21,7 +21,7 @@ The Blogging Platform is a web application that allows users to create, publish,
 - Git
 
 ## Demo
-- [Figma Prototype link](https://www.figma.com/proto/4Ytcjx3pUfuiwBUwe5zyeY/BlogHaven?page-id=2%3A25&type=design&node-id=43-578&viewport=-705%2C384%2C0.28&t=2G7wsXf3k9sKKAb2-1&scaling=scale-down&starting-point-node-id=2%3A26&mode=design)
+- [Figma Prototype link](https://www.figma.com/proto/4Ytcjx3pUfuiwBUwe5zyeY/BlogHaven?page-id=2%3A25&type=design&node-id=2-26&viewport=-705%2C384%2C0.28&t=2G7wsXf3k9sKKAb2-1&scaling=scale-down&starting-point-node-id=2%3A26&mode=design)
 
 ## Design
 - [User Interface](https://www.figma.com/file/4Ytcjx3pUfuiwBUwe5zyeY/BlogHaven?type=design&node-id=19%3A444&mode=design&t=w4DButMUphiFfTVa-1)
