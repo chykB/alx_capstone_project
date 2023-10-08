@@ -32,4 +32,4 @@ The Blogging Platform is a web application that allows users to create, publish,
 
 ## Contact Information
 Author: [Blessing Malik]()
-
+Github: [chykB](https://github.com/chykB)
