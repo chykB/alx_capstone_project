@@ -1,0 +1,20 @@
+{%extends 'base.html'%}
+{%block title%}
+    <title>Post</title>
+{%endblock title%}
+
+{%block content%}
+    <div class="container">
+        <div class="post">
+                <div class="post">
+                    <h2>{{ post.title }}</h2>
+                    <p>{{ post.date_posted.strftime('%Y-%m-%d') }}</p>
+                    <p>{{ post.description }}</p>
+                    <p>Author: {{ post.author.username }}</p>
+                    <img src="{{ url_for('static', filename='post_image/' + post.post_image_file) }}" alt="post image">
+                    
+                    <p>{{post.category}}</p>
+                </div>
+        </div>
+    </div>
+{%endblock%}
