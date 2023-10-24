@@ -5,6 +5,7 @@ from wtforms import StringField, PasswordField, SubmitField, BooleanField, TextA
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from models import User, Post, Category
 from connection import session
+from flask_ckeditor import CKEditorField #subject to change
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username', 
@@ -64,7 +65,7 @@ class UpdateAccountForm(FlaskForm):
 
 class PostForm(FlaskForm):
     title = StringField('Title', validators=[DataRequired()])
-    content = TextAreaField('Content', validators=[DataRequired()])
+    content = CKEditorField('Content', validators=[DataRequired()])
     description = TextAreaField('Description', validators=[DataRequired()])
     post_image = FileField('Upload Image', validators=[FileAllowed(['jpg', 'png', 'svg'])])
     category = SelectField('Category', coerce=int)
@@ -75,3 +76,8 @@ class PostForm(FlaskForm):
         categories = session.query(Category).all()
         
         self.category.choices = [(category.id, category.category_name) for category in categories]
+
+    
+class CommentForm(FlaskForm):
+    content = TextAreaField('Your Comment', validators=[DataRequired()])
+    submit = SubmitField('Submit Comment')

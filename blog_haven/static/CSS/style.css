@@ -1,7 +1,9 @@
+/* BASE STYLES */
 *{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    list-style: none;
 }
 
 html{
@@ -12,86 +14,327 @@ html{
 body {
     background: #fafafa;
     color: #333333;
-    margin-top: 5rem;
+    width: 100%;
+    
   }
   
-  h1, h2, h3, h4, h5, h6 {
-    color: #444444;
-  }
-  
-  .bg-steel {
-    background-color: #5f788a;
-  }
-  
-  .site-header .navbar-nav .nav-link {
-    color: #cbd5db;
-  }
-  
-  .site-header .navbar-nav .nav-link:hover {
-    color: #ffffff;
-  }
-  
-  .site-header .navbar-nav .nav-link.active {
-    font-weight: 500;
-  }
-  
-  .content-section {
-    background: #ffffff;
-    padding: 10px 20px;
-    border: 1px solid #dddddd;
-    border-radius: 3px;
-    margin-bottom: 20px;
-  }
-  
-  .article-title {
-    color: #444444;
-  }
-  
-  a.article-title:hover {
-    color: #428bca;
-    text-decoration: none;
-  }
-  
-  .article-content {
-    white-space: pre-line;
-  }
-  
-  .article-img {
-    height: 65px;
-    width: 65px;
-    margin-right: 16px;
-  }
-  
-  .article-metadata {
-    padding-bottom: 1px;
-    margin-bottom: 4px;
-    border-bottom: 1px solid #e3e3e3
-  }
-  
-  .article-metadata a:hover {
-    color: #333;
-    text-decoration: none;
-  }
-  
-  .article-svg {
-    width: 25px;
-    height: 25px;
-    vertical-align: middle;
-  }
-  
-  .account-img {
-    height: 125px;
-    width: 125px;
-    margin-right: 20px;
-    margin-bottom: 16px;
-  }
-  
-  .account-heading {
-    font-size: 2.5rem;
-  }
+.nav-section{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10rem;
+  font-size: 1.6rem;
+  height: 8rem;
+}
 
-  .user-image{
-    width: 40px;
-    height: 40px;
-    border-radius: 100%;
-  }
+
+nav{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: 600;
+}
+nav a{
+  text-decoration: none;
+  margin-right: 2rem;
+  color: #333333;
+}
+nav a:hover{
+  color: #FFD700;
+  font-size: 2rem;
+  border-bottom: 0.2rem solid #FFD700;
+}
+
+/* HOME PAGE STYLES */
+/* hero setion */
+.hero-section{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  /* width: 100%; */
+  
+}
+.left-container{
+  flex: 2;
+  position: relative;
+  margin-right: -100px;
+  z-index: 1;
+  width: 100%;
+  height: 40rem;
+}
+
+.hero-text{
+  position: absolute;
+  left: 10rem;
+  background-color: #001F3F;
+  color: #fff;
+  padding: 8rem 5rem ;
+
+
+}
+.hero-text h1{
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  line-height: normal;
+}
+.hero-text p{
+  margin-bottom: 2rem;
+}
+
+.hero-btn{
+  margin-top: 3rem;
+}
+.pry-hero-btn{
+  border-radius: .8rem;
+  padding: 1rem 3rem;
+  background-color: #FFD700;
+  color: #001F3F;
+  margin-right: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.12rem;
+  font-size: 1.2rem;
+}
+.hero-btn a{
+  text-decoration: none;
+}
+.sec-hero-btn{
+  border-radius: .8rem;
+  padding: 1rem 3.2rem;
+  margin-right: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.12rem;
+  font-size: 1.2rem;
+  border: .05rem solid #FFD700;
+  background: none;
+  color: #FFD700;
+
+}
+.hero-image img{
+  flex: 1;
+  max-width: 100%;
+  max-height: 700px; 
+  width: auto; 
+  height: auto; 
+  
+}
+
+/* RECENT POST */
+.container{
+  width: 100%;
+  padding: 10rem;
+  
+}
+.container h2{
+  font-size: 3rem;
+  margin-bottom: 2rem;
+}
+.post-list{
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  margin-top: 3rem;
+}
+.post-list p{
+  font-size: 1.4rem;
+  
+}
+
+.category{
+  font-weight: 600;
+  margin-bottom: 1rem;
+  margin-top: 1rem;
+}
+.post{
+  width: calc(33.33% - 1rem);
+  margin-bottom: 1rem;
+  padding: 1rem;
+  margin: 1rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 0.4rem;
+}
+
+.author-image{
+  width: 3.2rem;
+  height: 3.2rem;
+  border-radius: 50%;
+  margin-right: 1rem;
+}
+
+.post-image{
+  width: 100%;
+  height: auto;
+ 
+}
+.post-title-home a{
+  font-size: 2rem;
+  text-decoration: none;
+  color: #333333;}
+
+.learn-more{
+  font-weight: 500;
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.learn-more i{
+  color: #FFD700;
+  
+}
+
+.author{
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  margin: 1rem;
+}
+
+/* ACCOUNT PAGE STYLES */
+.account-section{
+  padding: 0 30rem;
+}
+
+.account-section h1{
+  font-size: 3.2rem;
+}
+.accoubt-heading{
+  font-size: 2.4rem;
+}
+
+.user-section{
+  text-align: center;
+}
+#update-form{
+  display: none;
+}
+
+.button {
+  background-color: #FFD700;
+  color: #001F3F;
+  border: none;
+  padding: 1rem 2rem;
+  cursor: pointer;
+  border-radius: 0.4rem;
+  font-weight: 600;
+  margin: 2rem 0;
+}
+
+.user-image {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
+.form-group {
+  margin: 10px 0;
+}
+
+.form-label {
+  font-weight: bold;
+  font-size: 1.6rem;
+}
+
+.form-control {
+  width: 100%;
+  padding: 10px;
+  border: none;
+
+}
+
+.form-control-file {
+  padding: 10px;
+}
+
+.invalid-feedback {
+  color: red;
+  font-size: 1.6rem;
+}
+
+
+/* CREATE_POST PAGE STYLES */
+.content-section-post{
+  padding: 0 10rem;
+}
+.form-control.ckeditor {
+  padding: 0;
+  background: transparent;
+}
+.cke_chrome {
+  border: none;
+  
+}
+fieldset{
+  border: none;
+  width: 80%;
+}
+legend{
+  font-size: 2.4rem;
+  font-weight: 600;
+}
+
+.user-image:hover {
+  transform: scale(1.1);
+  transition: transform 0.2s ease-in-out;
+}
+
+.button:hover {
+  background-color: #001F3F;
+  transition: background-color 0.2s ease-in-out;
+  color: #FFD700;
+}
+
+
+/* SINGLE-POST PAGE STYLE */
+
+.post-container{
+  max-width: 80rem;
+  margin: auto;
+  padding-top: 3rem;
+}
+.single-post-image{
+  width: 100%;
+  height: 40rem;
+  margin: 2rem 0;
+}
+.single-post{
+  padding: 2rem;
+}
+.author-name{
+  font-weight: 600;
+}
+.post-title{
+  font-size: 4rem;
+  font-weight: 600;
+}
+.post-category{
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+.body{
+  font-size: 2rem;
+  line-height: normal;
+  color: #777676;
+}
+.update-btn{
+  padding: 0.5rem 0.5rem;
+  background-color: #FFD700;
+  color: #001F3F;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 0.4rem;
+}
+
+.delete-btn{
+  padding: 0.5rem 0.5rem;
+  border: 0.2rem solid red;
+  color: #001F3F;
+  text-decoration: none;
+  font-weight: 600;
+  border-radius: 0.4rem;
+}
+
+
+/* STYLES FOR UPDATE POST */
+.post-update{
+  padding: 0 10rem;
+}

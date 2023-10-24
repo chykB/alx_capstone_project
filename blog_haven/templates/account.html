@@ -3,67 +3,94 @@
     <title>Account</title>
 {%endblock title%}
 {%block content%}
-    <div>
-        <h1>Welcome {{current_user.username}}</h1>
-    </div>
+    <section class="account-section">
+        <div class="user-section">
+            <div>
+                <h1>Welcome {{current_user.username}}</h1>
+            </div>
+        
+            <section class="user-section">
+                <div class="media">
+                    <img class="user-image" src="{{image_file}}" alt="user image">
+                </div>
+                <div class="media-body">
+                    <h2 class="accoubt-heading">{{current_user.username}}</h2>
+                    <p class="text-secondary">{{current_user.email}}</p>
+                </div>
+                <button id="update-profile-button" class="button">UPDATE PROFILE</button>
+            </section>
+        </div>
+        <section class="update-account-form">
+            <div class="content-section" id="update-form">
+                <form action="" method="POST" enctype="multipart/form-data">
+                    {{form.hidden_tag()}}
+                    <fieldset class="form-group">
+                        <legend>Update Account Info</legend>
+                        <div class="form-group">
+                            {{form.username.label(class="form-label")}}
+        
+                            {%if form.username.errors%}
+                                {{form.username(class="form-control invalid")}}
+                                <div class="invalid-feedback">
+                                    {%for error in form.username.errors%}
+                                        <span>{{error}}</span>
+                                    {%endfor%}
+                                </div>
+                            {%else%}
+                                    {{form.username(class="form-control")}}
+                                    <div>
+                                        {%for success in form.username.success %}
 
-    <section class="user-section">
-        <div class="media">
-            <img class="user-image" src="{{image_file}}" alt="user image">
-        </div>
-        <div class="media-body">
-            <h2 class="accoubt-heading">{{current_user.username}}</h2>
-            <p class="text-secondary">{{current_user.email}}</p>
-        </div>
-    </section>
-    <section class="update-account-form">
-        <div class="content-section">
-            <form action="" method="POST" enctype="multipart/form-data">
-                {{form.hidden_tag()}}
-                <fieldset class="form-group">
-                    <legend>Update Account Info</legend>
-                    <div class="form-group">
-                        {{form.username.label(class="form-label")}}
-    
-                        {%if form.username.errors%}
-                            {{form.username(class="form-control invalid")}}
+                                        {%endfor%}
+                                    </div>
+                            {%endif%}
+                        </div>
+                        <div class="form-group">
+                            {{form.email.label(class="form-label")}}
+                            {%if form.email.errors%}
+                            {{form.email(class="form-control invalid")}}
                             <div class="invalid-feedback">
-                                {%for error in form.username.errors%}
+                                {%for error in form.email.errors%}
                                     <span>{{error}}</span>
                                 {%endfor%}
                             </div>
-                        {%else%}
-                                {{form.username(class="form-control")}}
-                        {%endif%}
-                    </div>
-                    <div class="form-group">
-                        {{form.email.label(class="form-label")}}
-                        {%if form.email.errors%}
-                        {{form.email(class="form-control invalid")}}
-                        <div class="invalid-feedback">
-                            {%for error in form.email.errors%}
-                                <span>{{error}}</span>
-                            {%endfor%}
+                            {%else%}
+                                {{form.email(class="form-control")}}
+                            {%endif%}
                         </div>
-                        {%else%}
-                            {{form.email(class="form-control")}}
-                        {%endif%}
-                    </div>
-                    
+                        
+                        <div class="form-group">
+                            {{form.picture.label()}}
+                            {{form.picture(class="form-control-f")}}
+                            {%if form.picture.errors%}
+                                {%for error in form.picture.errors%}
+                                    <span class="text-danger">{{error}}</span><br>
+                                {%endfor%}
+                            {%endif%}
+                        </div>
+                    </fieldset>
                     <div class="form-group">
-                        {{form.picture.label()}}
-                        {{form.picture(class="form-control-f")}}
-                        {%if form.picture.errors%}
-                            {%for error in form.picture.errors%}
-                                <span class="text-danger">{{error}}</span><br>
-                            {%endfor%}
-                        {%endif%}
+                        {{form.submit(class="button")}}
                     </div>
-                </fieldset>
-                <div class="form-group">
-                    {{form.submit(class="button")}}
-                </div>
-            </form>
-        </div>
+                </form>
+            </div>
+        </section>
     </section>
+
+    
+    <script>
+        document.getElementById('update-profile-button').addEventListener('click', function () {
+            let updateForm = document.getElementById('update-form');
+            if (updateForm.style.display === 'none') {
+                updateForm.style.display = 'block';
+            } else {
+                updateForm.style.display = 'none';
+            }
+        });
+    </script>
+
 {%endblock%}
+
+<script>
+    
+</script>

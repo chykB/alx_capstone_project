@@ -11,32 +11,70 @@
                 <h1>Unleash Your Words, Ignite Your World</h1>
                 <p>Welcome to BlogHaven, your digital sanctuary for writers, storytellers, and visionaries. Discover a world where your words have the power to inspire, educate, and create change.</p>
                 <div class="hero-btn">
-                    <button class="pry-hero-btn">Register</button>
-                    <button class="sec-hero-btn">Demo</button>
+                    <!--   -->
+                    <a class="pry-hero-btn" href="{{ url_for('register') }}">REGISTER</a>
+                    <a class="sec-hero-btn" href="#">DEMO</a>
+                    
                 </div>
             </div>
         </div>
         <div class="hero-image">
-            <img height="100%" src="{{ url_for('static', filename='images/hero-image.png') }}" alt="a female writer">
+            <img src="{{ url_for('static', filename='images/hero_image.png') }}" alt="a female writer">
         </div>
     </section>
 
-
     <div class="container">
-        <h1>Recent Posts</h1>
+        <h2 >Recent Posts</h2>
         <div class="post-list">
-            {% for post in posts %}
-                <div class="post">
-                    <h2><a href="{{url_for('post', post_id=post.id)}}">{{ post.title }}</a></h2>
-                    <p>{{ post.date_posted.strftime('%Y-%m-%d') }}</p>
-                    <p>{{ post.description }}</p>
-                    <p>Author: {{ post.author.username }}</p>
-                    <img src="{{ url_for('static', filename='post_image/' + post.post_image_file) }}" alt="post image">
-                    
-                    <p>{{post.category}}</p>
+            {% for post in posts|reverse %} 
+            <div class="post">
+                <div class="author">
+                    <img  class="author-image" src="{{ url_for('static', filename='images/' + post.author.image_file) }}" alt="Author image">
+                    <div>
+                        <p>Author: {{ post.author.username }}</p>
+                        <p>{{ post.date_posted.strftime('%Y-%m-%d') }}</p>
+                    </div>
                 </div>
+    
+                <img  class="post-image" src="{{ url_for('static', filename='post_image/' + post.post_image_file) }}" alt="post image">
+                <h3 class="post-title-home"><a href="{{ url_for('post', post_id=post.id) }}">{{ post.title }}</a></h3>
+                <p>{{ post.description }}</p>
+    
+                <p class="category">{{ post.category }}</p>
+                <a href="{{ url_for('post', post_id=post.id) }}"><span class="learn-more">Learn More <i class="fa-solid fa-arrow-right"></i></span></a>
+            </div>
+    
+            {% if loop.index % 3 == 0 %} 
+        </div>
+        <div class="post-list">
+            {% endif %}
             {% endfor %}
         </div>
     </div>
+    
+    <!-- <div class="container">
+        <h2>Recent Posts</h2>
+        <div class="post-list">
+            {% for post in posts %}
+                <div class="post">
+                    <div class="author">
+                        <img src="{{image_file}}" alt="Author image">
+                        <div>
+                            <p>Author: {{ post.author.username }}</p>
+                            <p>{{ post.date_posted.strftime('%Y-%m-%d') }}</p>
+                        </div>
+                    </div>
+                    
+                    <img src="{{ url_for('static', filename='post_image/' + post.post_image_file) }}" alt="post image">
+                    <h3><a href="{{url_for('post', post_id=post.id)}}">{{ post.title }}</a></h3>
+                    <p>{{ post.description }}</p>
+                    
+                    <p>{{post.category}}</p>
+                    <span>Learn More <i class="fa-solid fa-arrow-right"></i></span>
+                </div>
+
+            {% endfor %}
+        </div>
+    </div> -->
 
 {%endblock content%}

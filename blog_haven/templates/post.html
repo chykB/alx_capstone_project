@@ -4,17 +4,67 @@
 {%endblock title%}
 
 {%block content%}
-    <div class="container">
-        <div class="post">
-                <div class="post">
-                    <h2>{{ post.title }}</h2>
-                    <p>{{ post.date_posted.strftime('%Y-%m-%d') }}</p>
-                    <p>{{ post.description }}</p>
-                    <p>Author: {{ post.author.username }}</p>
-                    <img src="{{ url_for('static', filename='post_image/' + post.post_image_file) }}" alt="post image">
-                    
-                    <p>{{post.category}}</p>
+    <div class="post-container">
+        <div class="single-post">
+                <div class="general-post">
+                   <div class="author">
+                        <div class="media">
+                            <img  class="author-image" src="{{ url_for('static', filename='images/' + post.author.image_file) }}" alt="Author image">
+
+                        </div>
+                        <div>
+                            <p class="author-name">Author: {{ post.author.username }}</p>
+                            <p>{{ post.date_posted.strftime('%Y-%m-%d') }}</p>
+                        </div>
+                   </div>
+                   <img class="single-post-image" src="{{ url_for('static', filename='post_image/' + post.post_image_file) }}" alt="Post Image">
+                    <h1 class="post-title">{{ post.title }}</h1>
+                   
+                    <p class="body">{{ post.content|safe }}</p>                
+                    <p class="post-category">{{post.category}}</p>
+                   
                 </div>
+                <div class="comments">
+                    <h2>Comments</h2>
+                    <ul>
+                        {% for comment in comments %}
+                        <li>
+                            <div class="comment">
+                                <p class="comment-author">Comment by: {{ comment.user.username }}</p>
+                                <p class="comment-text">{{ comment.content }}</p>
+                            </div>
+                        </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+                <form action="{{ url_for('add_comment', post_id=post.id) }}" method="POST">
+                    {{form.hidden_tag()}}
+                    <div class="form-group">
+                        {{form.content.label(class="form-label")}}
+                        {%if form.content.errors%}
+                        {{form.content(class="form-control invalid")}}
+                        <div class="invalid-feedback">
+                            {%for error in form.content.errors%}
+                                <span>{{error}}</span>
+                            {%endfor%}
+                        </div>
+                        {%else%}
+                            {{form.text(class="form-control")}}
+                        {%endif%}
+                    </div>
+
+                    <div class="form-group">
+                        {{form.submit(class="button")}}
+                    </div>
+                </form>
+
+                {%if post.author == current_user%}
+                    <div>
+                        <a class="update-btn" href="{{ url_for('update_post', post_id=post.id) }}">UPDATE</a>
+                        <a class="delete-btn" href="{{ url_for('delete_post', post_id=post.id) }}">DELETE</a>
+
+                    </div>
+                {%endif%}
         </div>
     </div>
 {%endblock%}
