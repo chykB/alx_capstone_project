@@ -42,7 +42,7 @@ nav a{
 }
 
 nav a:hover{
-  color: #FFD700;
+  color: #333333;
   font-size: 1.8rem;
   border-bottom: 0.2rem solid #FFD700;
 }
@@ -118,7 +118,14 @@ nav a:hover{
 }
 .hero-btn a{
   text-decoration: none;
+
 }
+
+.pry-hero-btn:hover{
+  font-size: 1.4rem;
+  transition: color 0.3s ease-out, font-size 0.3s ease-out, border-bottom 0.3s ease-out;
+}
+
 .sec-hero-btn{
   border-radius: .8rem;
   padding: 1rem 3.2rem;
@@ -131,6 +138,12 @@ nav a:hover{
   color: #FFD700;
 
 }
+
+.sec-hero-btn:hover{
+  font-size: 1.4rem;
+  transition: color 0.3s ease-out, font-size 0.3s ease-out, border-bottom 0.3s ease-out;
+}
+
 .hero-image img{
   flex: 1;
   max-width: 100%;
