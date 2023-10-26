@@ -13,6 +13,28 @@ body{
     color: #fff;
 }
 
+/* FLASH MESSAGES */
+/* FLASH MESSAGES */
+.flash-messages {
+    text-align: center;
+    padding: 1rem;
+    margin: 1rem 0;
+    
+    border-radius: 5px;
+  }
+  
+  .flash-success {
+    background-color: #f44336; 
+    color: #fff;
+  }
+  
+  .flash-error {
+    background-color: #4CAF50; 
+    color: #fff;
+  }
+
+
+
 .register{
     width: 36%;
     margin: auto;  

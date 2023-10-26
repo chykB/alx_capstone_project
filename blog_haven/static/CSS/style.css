@@ -38,11 +38,33 @@ nav a{
   text-decoration: none;
   margin-right: 2rem;
   color: #333333;
+  transition: color 0.3s ease-out, font-size 0.3s ease-out, border-bottom 0.3s ease-out;
 }
+
 nav a:hover{
   color: #FFD700;
-  font-size: 2rem;
+  font-size: 1.8rem;
   border-bottom: 0.2rem solid #FFD700;
+}
+
+
+/* FLASH MESSAGES */
+.flash-messages {
+  text-align: center;
+  padding: 1rem;
+  margin: 1rem 0;
+  
+  border-radius: 5px;
+}
+
+.flash-success {
+  background-color: #f44336; 
+  color: #fff;
+}
+
+.flash-error {
+  background-color: #4CAF50; 
+  color: #fff;
 }
 
 /* HOME PAGE STYLES */
@@ -51,7 +73,7 @@ nav a:hover{
   display: flex;
   justify-content: space-between;
   align-items: center;
-  /* width: 100%; */
+ 
   
 }
 .left-container{
@@ -300,21 +322,37 @@ legend{
 }
 .author-name{
   font-weight: 600;
+  font-size: 1.4rem;
 }
-.post-title{
+.single-post-title{
   font-size: 4rem;
   font-weight: 600;
+  margin: 1rem 0;
 }
-.post-category{
+.author-comment{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.author-comment i{
+  color: #001F3F;
+}
+
+.single-post-category{
   font-weight: 600;
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
+  font-size: 1.4rem;
+  margin: 1.4rem 0;
 }
-.body{
-  font-size: 2rem;
+.single-post-body{ 
+  font-size: 1.6rem;
   line-height: normal;
   color: #777676;
 }
+.update-delete{
+  margin-left: 65rem;
+}
+
 .update-btn{
   padding: 0.5rem 0.5rem;
   background-color: #FFD700;
@@ -322,10 +360,11 @@ legend{
   text-decoration: none;
   font-weight: 600;
   border-radius: 0.4rem;
+  margin-right: 1rem;
 }
 
 .delete-btn{
-  padding: 0.5rem 0.5rem;
+  padding: 0.4rem 0.5rem;
   border: 0.2rem solid red;
   color: #001F3F;
   text-decoration: none;
@@ -333,8 +372,56 @@ legend{
   border-radius: 0.4rem;
 }
 
+.comment-button{
+  padding: 0.5rem 0.5rem;
+  background-color: #FFD700;
+  color: #001F3F;
+  border: none;
+  font-weight: 600;
+  border-radius: 0.4rem;
+  
+}
+.comment{
+  margin: 1rem 0;
+}
+.comment-author{
+  font-weight: 600;
+}
 
 /* STYLES FOR UPDATE POST */
 .post-update{
   padding: 0 10rem;
+}
+
+
+/* STYLES FOR ALL POSTS PAGE */
+.posts-container{
+  width: 100%;
+  padding: 010rem;
+}
+
+.search-category{
+  width: 36%;
+  margin: auto;
+}
+
+.search-container{
+  border: 0.1rem solid #e7e6e6;
+  border-radius: 0.8rem;
+  display: flex;
+  align-items: center;
+  padding-left: 1rem;
+  background-color: #fff;
+}
+
+.search-category input{
+  height: 3.6rem;
+  width: 100%;
+  border: none;
+  padding-left: 1rem;
+}
+
+.search-category button{
+  border: none;
+  background: none;
 }

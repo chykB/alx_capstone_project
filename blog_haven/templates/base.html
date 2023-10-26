@@ -27,36 +27,51 @@
                     
                 </ul>
                 {%if current_user.is_authenticated%}
+                    <a class="nav-btn" href="{{ url_for('posts') }}">All Posts</a>
                     <a class="nav-btn" href="{{ url_for('account') }}">Account</a>
                     <a class="nav-btn" href="{{ url_for('new_post') }}">New Post</a>
                     <a class="nav-btn" href="{{ url_for('logout') }}">Logout</a>
                 {%else%}
+                    <a class="nav-btn" href="{{ url_for('posts') }}">All Posts</a>
                     <a class="nav-btn" href="{{ url_for('register') }}">Register</a>
                     <a class="nav-btn" href="{{ url_for('login') }}">Login</a>
                 {%endif%}
             </nav>
         </section>
     </header>
-    {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                <ul>
-                    {% for message in messages %}
-                        <li class="success">{{ message }}</li>
-                    {% endfor %}
-                </ul>
-            {% endif %}
-    {% endwith %}
-    <!-- {%with messages = get_flashed_messages(with_categories=true)%}
-        {%if messages%}
-            {%for category, message in messages%}
-                <div class="alert alert-{{category}}">
-                    {{message}}
-                </div>
-            {%endfor%}
-        {%endif%}
-    {%endwith%} -->
-    {%block content%}
 
+    <div class="flash-messages">
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                <div class="flash-container">
+                    <ul>
+                        {% for message in messages %}
+                            <li class="flash-message {{ 'flash-success' if 'success' in message else 'flash-error' }}">
+                                {{ message }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        {% endwith %}
+    </div>
+
+    
+    {%block content%}
+        <script>
+            // Function to hide flash messages after a specified time
+            function hideFlashMessages() {
+                var flashMessages = document.querySelectorAll('.flash-message');
+                flashMessages.forEach(function(message) {
+                    setTimeout(function() {
+                        message.style.display = 'none';
+                    }, 3000); // Adjust the time (in milliseconds) as needed (e.g., 3000ms = 3 seconds)
+                });
+            }
+        
+            // Call the hideFlashMessages function when the page loads
+            window.addEventListener('load', hideFlashMessages);
+        </script>
     {%endblock%}
 </body>
 </html>

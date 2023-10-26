@@ -9,27 +9,32 @@ from flask_bcrypt import Bcrypt
 from flask_login import LoginManager, login_user, current_user, logout_user, login_required
 
 
-
-
+# Create a Flask app instance.
 app = Flask(__name__)
 app.config['SECRET_KEY'] = '875ef99af5d26318088c80ac0d09bc28'
+
+# Initialize Bcrypt for password hashing
 bcrypt = Bcrypt(app)
+
+# Initialize the Flask-Login extension and configure it.
 login_manager = LoginManager(app)
 login_manager.login_view = 'login'
+
+# Initialize the CKEditor extension.
 ckeditor = CKEditor(app)
 
+# Initialize the Flask-Login extension and configure it.
 @login_manager.user_loader
 def user_loader(user_id):
     from models import User
     return session.query(User).get(int(user_id))
 
 
-
-
-
-
 @app.route('/')
 def index():
+    """
+    Route for the homepage displaying posts.
+    """
     from models import Post
     posts = session.query(Post).all()
     return render_template('index.html', posts=posts)
@@ -37,10 +42,11 @@ def index():
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    """
+    Route for user registration.
+    """
     from forms import RegistrationForm
     from models import User
-    # if current_user.is_authenticated:
-    #     return redirect(url_for('index'))
     form = RegistrationForm()
     if form.validate_on_submit():
         hashed_password = bcrypt.generate_password_hash(form.password.data).decode('utf-8')
@@ -54,6 +60,9 @@ def register():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    """
+    Route for user login.
+    """
     from forms import LoginForm
     from models import User
     # if current_user.is_authenticated:
@@ -72,11 +81,17 @@ def login():
 
 @app.route('/logout')
 def logout():
+    """
+    Route for user logout.
+    """
     logout_user()
     return redirect(url_for('index'))
 
 
 def save_picture(form_picture):
+    """
+    Function to save a profile picture and return the filename.
+    """
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(form_picture.filename)
     picture_fn = random_hex + f_ext
@@ -87,6 +102,9 @@ def save_picture(form_picture):
 @app.route('/account', methods=['GET', 'POST'])
 @login_required
 def account():
+    """
+    Route for the user account management.
+    """
     from forms import UpdateAccountForm
     form = UpdateAccountForm()
     if form.validate_on_submit():
@@ -106,16 +124,10 @@ def account():
     return render_template('account.html', image_file=image_file, form=form)
 
 
-
-# def save_post_image(form_post_image):
-#     random_hex = secrets.token_hex(8)
-#     _, f_ext = os.path.splitext(form_post_image.filename)
-#     post_image = random_hex + f_ext
-#     picture_path = os.path.join(app.root_path, 'static/post_image', post_image)
-#     form_post_image.save(picture_path)
-#     return post_image
-
 def save_post_image(form_post_image):
+    """
+    Function to save a post image and return the filename.
+    """
     random_hex = secrets.token_hex(8)
     _, f_ext = os.path.splitext(form_post_image.filename)
     post_image = random_hex + f_ext
@@ -130,6 +142,9 @@ def save_post_image(form_post_image):
 @app.route('/post/new', methods=['GET', 'POST'])
 @login_required
 def new_post():
+    """
+    Route for creating a new post.
+    """
     from forms import PostForm
     from models import Post, Category, User
     form = PostForm()
@@ -159,7 +174,7 @@ def new_post():
             session.add(post)
             session.commit()
             flash('Your post has been created', 'success')
-            return redirect(url_for('index'))
+            return redirect(url_for('posts'))
         
         except IntegrityError as e:
             session.rollback()
@@ -174,6 +189,9 @@ def new_post():
 
 @app.route('/post/<int:post_id>', methods=['GET','POST'])
 def post(post_id):
+    """
+    Route for viewing a post and adding comments.
+    """
     from models import Post, Comment
     from forms import CommentForm
     post = session.query(Post).get(post_id)
@@ -190,6 +208,9 @@ def post(post_id):
 @app.route('/post/<int:post_id>/update', methods=['GET', 'POST'])
 @login_required
 def update_post(post_id):
+    """
+    Route for updating an existing post.
+    """
     from models import Post, Category
     from forms import PostForm
 
@@ -223,6 +244,9 @@ def update_post(post_id):
 @app.route('/post/<int:post_id>/delete_post', methods=['GET','POST'])
 @login_required
 def delete_post(post_id):
+    """
+    Route for deleting a post.
+    """
     from models import Post
 
     post = session.query(Post).get(post_id)
@@ -237,6 +261,9 @@ def delete_post(post_id):
 @app.route('/post/<int:post_id>/comment', methods=['GET', 'POST'])
 @login_required
 def add_comment(post_id):
+    """
+    Route for adding a comment to a post.
+    """
     from models import Post, Comment
     from forms import CommentForm
 
@@ -246,7 +273,7 @@ def add_comment(post_id):
         post = session.query(Post).get(post_id)
         comment = Comment(
             content=form.content.data,
-            user=current_user,
+            user_id=current_user.id,
             post=post
         )
 
@@ -258,6 +285,22 @@ def add_comment(post_id):
         flash('There was an error with your comment. Please check the form.', 'danger')
 
     return redirect(url_for('post', post_id=post_id))
+
+
+
+@app.route('/posts', methods=['GET'])
+def posts():
+    from models import Post, Category
+    category = request.args.get('category')
+    search_query = request.args.get('search')
+    if category:
+        posts = session.query(Post).filter_by(category_id=category)
+    elif search_query:
+        posts = session.query(Post).filter(Post.title.ilike(f"%{search_query}%") | Post.content.ilike(f"%{search_query}%")).all()
+    else:
+        posts = session.query(Post).all()
+        
+    return render_template('posts.html', posts=posts, categories=session.query(Category).all())
 
 
 

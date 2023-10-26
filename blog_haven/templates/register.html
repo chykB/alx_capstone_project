@@ -14,7 +14,24 @@
     {%block title%}
     <title>Register</title>
     {%endblock title%} 
+
     {%block content%}
+        <div class="flash-messages">
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="flash-container">
+                        <ul>
+                            {% for message in messages %}
+                                <li class="flash-message {{ 'flash-success' if 'success' in message else 'flash-error' }}">
+                                    {{ message }}
+                                </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                {% endif %}
+            {% endwith %}
+        </div>
+
         <div class="content-section register">
             <form action="" method="POST">
                 {{form.hidden_tag()}}
@@ -86,6 +103,21 @@
             </form>
            
         </div>
+
+        <script>
+            // Function to hide flash messages after a specified time
+            function hideFlashMessages() {
+                var flashMessages = document.querySelectorAll('.flash-message');
+                flashMessages.forEach(function(message) {
+                    setTimeout(function() {
+                        message.style.display = 'none';
+                    }, 2000);
+                });
+            }
+        
+            // Call the hideFlashMessages function when the page loads
+            window.addEventListener('load', hideFlashMessages);
+        </script>
         
     {%endblock content%}
 
